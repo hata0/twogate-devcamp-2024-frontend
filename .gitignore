@@ -37,3 +37,7 @@ next-env.d.ts
 
 # msw
 *mockServiceWorker.js
+
+# storybook
+*storybook.log
+storybook-static
