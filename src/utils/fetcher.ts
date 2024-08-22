@@ -15,8 +15,9 @@ export const fetcher = async <T extends object>(
       body: body && JSON.stringify(body),
       headers: {
         "Content-Type": "application/json",
+        "ngrok-skip-browser-warning": true,
         ...headers,
-      },
+      } as unknown as HeadersInit,
     });
   } catch (e) {
     error = e;
