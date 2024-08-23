@@ -1,6 +1,6 @@
 import { Friends } from ".";
 
-import { getFriendsHandler } from "@/services/backend/friends/mock";
+import { FRIENDS } from "@/tests/mocks/friends";
 import { Meta } from "@/tests/storybook/types/Meta";
 import { StoryObj } from "@/tests/storybook/types/StoryObj";
 
@@ -10,11 +10,9 @@ type Story = StoryObj<T>;
 export const Default: Story = {};
 
 export default {
-  component: Friends,
-  parameters: {
-    msw: {
-      handlers: [getFriendsHandler()],
-    },
+  args: {
+    friends: FRIENDS,
   },
+  component: Friends,
   title: "Features/friends/Friends",
 } satisfies Meta<T>;

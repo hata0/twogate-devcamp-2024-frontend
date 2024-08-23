@@ -1,17 +1,23 @@
-import { useEffect } from "react";
+import Image from "next/image";
 
-import { getFriends } from "@/services/backend/friends";
+import { Friend } from "@/services/backend/friends";
 
-export const Friends = () => {
-  useEffect(() => {
-    void (async () => {
-      await getFriends("a");
-    })();
-  }, []);
+type Props = {
+  friends: Friend[];
+};
 
+export const Friends = ({ friends }: Props) => {
   return (
     <div>
-      <div>hello</div>
+      {friends.map((friend, index) => (
+        <div key={index} className="flex space-x-2">
+          <Image alt="プロフィール画像" height={100} src={friend.imageUrl} width={100} />
+          <div>
+            <div>{friend.name}</div>
+            <div>{friend.exerciseGoalTitle}</div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
