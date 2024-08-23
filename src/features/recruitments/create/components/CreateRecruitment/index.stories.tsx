@@ -1,6 +1,6 @@
-import { postRecruitmentsHandler } from "@/services/backend/recruitments/mock";
 import { CreateRecruitment } from ".";
 
+import { postRecruitmentsHandler } from "@/services/backend/recruitments/mock";
 import { Meta } from "@/tests/storybook/types/Meta";
 import { StoryObj } from "@/tests/storybook/types/StoryObj";
 
@@ -26,11 +26,11 @@ export const ServerError: Story = {
 };
 
 export default {
+  component: CreateRecruitment,
   parameters: {
     msw: {
       handlers: [postRecruitmentsHandler()],
     },
   },
-  component: CreateRecruitment,
   title: "Features/recruitments/create/CreateRecruitment",
 } satisfies Meta<T>;

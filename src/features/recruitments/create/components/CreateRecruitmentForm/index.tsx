@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/shadcn/ui/button";
@@ -15,7 +16,6 @@ import {
   CreateRecruitmentInput,
   createRecruitmentInputSchema,
 } from "@/services/backend/recruitments";
-import Link from "next/link";
 
 type Props = {
   onSubmit: (values: CreateRecruitmentInput) => Promise<void>;
