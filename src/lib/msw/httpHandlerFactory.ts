@@ -24,10 +24,17 @@ export const httpHandlerFactory = (
           status: error.status,
         });
       });
-    } else if (resolver) {
-      return http[method](path, resolver);
     } else {
-      return http[method](path, defaultResolver);
+      return http[method](path, async (args) => {
+        await baseResolver(args);
+        return (await resolver?.(args)) ?? (await defaultResolver(args));
+      });
     }
   };
+};
+
+const baseResolver: HttpResponseResolver = (args) => {
+  args.request.headers.forEach((value, key) => {
+    console.log(`${key}: ${value}`);
+  });
 };

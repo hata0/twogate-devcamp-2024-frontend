@@ -6,9 +6,6 @@ import { httpHandlerFactory } from "@/lib/msw/httpHandlerFactory";
 
 const path = createPath();
 
-export const getFriendsHandler = httpHandlerFactory("get", path, ({ request }) => {
-  request.headers.forEach((value, key) => {
-    console.log(`${key}: ${value}`);
-  });
+export const getFriendsHandler = httpHandlerFactory("get", path, () => {
   return HttpResponse.json("友達");
 });
