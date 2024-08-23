@@ -6,7 +6,7 @@ export const Recruitments = () => {
   return (
     <div>
       <Button asChild>
-        <Link href="/recruitments/new">新しく募集する</Link>
+        <Link href="/recruitments/create">新しく募集する</Link>
       </Button>
     </div>
   );
