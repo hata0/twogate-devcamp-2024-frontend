@@ -13,8 +13,16 @@ import {
 } from "@/components/shadcn/ui/form";
 import { Input } from "@/components/shadcn/ui/input";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/shadcn/ui/select";
+import {
   CreateRecruitmentInput,
   createRecruitmentInputSchema,
+  RecruitmentType,
 } from "@/services/backend/recruitments";
 
 type Props = {
@@ -24,6 +32,7 @@ type Props = {
 export const CreateRecruitmentForm = ({ onSubmit }: Props) => {
   const form = useForm<CreateRecruitmentInput>({
     defaultValues: {
+      recruitmentType: RecruitmentType.Friend,
       title: "",
     },
     mode: "onChange",
@@ -51,6 +60,26 @@ export const CreateRecruitmentForm = ({ onSubmit }: Props) => {
                 <Input {...field} />
               </FormControl>
               <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="recruitmentType"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>募集形式</FormLabel>
+              <Select defaultValue={field.value.toString()} onValueChange={field.onChange}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value={RecruitmentType.Friend.toString()}>友達のみ</SelectItem>
+                  <SelectItem value={RecruitmentType.Location.toString()}>場所を指定</SelectItem>
+                </SelectContent>
+              </Select>
             </FormItem>
           )}
         />
