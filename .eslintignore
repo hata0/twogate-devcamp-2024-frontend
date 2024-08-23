@@ -9,3 +9,4 @@ jest.polyfills.ts
 mockServiceWorker.js
 storybook-static
 next.config.mjs
+/src/components/shadcn

@@ -6,3 +6,5 @@ package-lock.json
 coverage
 mockServiceWorker.js
 storybook-static
+/src/components/shadcn
+/.vscode/settings.json
