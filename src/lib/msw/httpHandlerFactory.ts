@@ -3,7 +3,6 @@ import { http, HttpResponse, HttpResponseResolver } from "msw";
 type HandlerFactoryArgs = {
   isNetworkError?: boolean;
   error?: {
-    message: string;
     status: number;
   };
   resolver?: HttpResponseResolver;
@@ -21,14 +20,9 @@ export const httpHandlerFactory = (
       });
     } else if (error) {
       return http[method](path, () => {
-        return HttpResponse.json(
-          {
-            error: error.message,
-          },
-          {
-            status: error.status,
-          },
-        );
+        return HttpResponse.json(null, {
+          status: error.status,
+        });
       });
     } else if (resolver) {
       return http[method](path, resolver);
