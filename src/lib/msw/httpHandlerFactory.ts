@@ -33,9 +33,8 @@ export const httpHandlerFactory = (
   };
 };
 
-const baseResolver: HttpResponseResolver = async ({ request }) => {
+const baseResolver: HttpResponseResolver = ({ request }) => {
   request.headers.forEach((value, key) => {
     console.log(`${key}: ${value}`);
   });
-  console.log(await request.json());
 };
