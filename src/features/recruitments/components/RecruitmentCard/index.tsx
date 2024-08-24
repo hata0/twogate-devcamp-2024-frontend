@@ -15,6 +15,7 @@ export const RecruitmentCard = ({ recruitment }: Props) => {
       <div className="relative w-1/3">
         <Image
           fill
+          priority
           alt={`${recruitment.name} profile picture`}
           className="object-cover"
           sizes="(max-width: 768px) 100vw, 33vw"
