@@ -2,15 +2,19 @@ import { z } from "zod";
 
 import { RecruitmentType } from "./type";
 
-export const createRecruitmentInputSchema = z.object({
-  recruitmentType: z.preprocess((val) => {
-    if (typeof val === "string") {
-      const parsed = parseInt(val, 10);
-      if (!isNaN(parsed)) {
-        return parsed;
-      }
-    }
-    return val;
-  }, z.nativeEnum(RecruitmentType)),
-  title: z.string().min(1, "募集内容を入力してください"),
-});
+export const createRecruitmentInputSchema = z.union([
+  z.object({
+    recruitmentType: z.preprocess((val) => {
+      return Number(val);
+    }, z.literal(RecruitmentType.Friend)),
+    title: z.string().min(1, "募集内容を入力してください"),
+  }),
+  z.object({
+    latitude: z.coerce.number(),
+    longitude: z.coerce.number(),
+    recruitmentType: z.preprocess((val) => {
+      return Number(val);
+    }, z.literal(RecruitmentType.Location)),
+    title: z.string().min(1, "募集内容を入力してください"),
+  }),
+]);
