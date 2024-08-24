@@ -4,15 +4,17 @@ import { Button } from "@/components/shadcn/ui/button";
 
 export const Top = () => {
   return (
-    <div>
-      <div className="flex w-full items-center justify-center space-x-2">
-        <Button asChild>
-          <Link href="/friends">フレンド一覧</Link>
-        </Button>
-        <Button asChild>
-          <Link href="/recruitments?type=location">運動の募集一覧</Link>
-        </Button>
-      </div>
-    </div>
+    <header className="bg-blue-500 p-4 shadow-md">
+      <nav className="flex items-center justify-center">
+        <div className="flex space-x-4">
+          <Button asChild>
+            <Link href="/friends">フレンド一覧</Link>
+          </Button>
+          <Button asChild>
+            <Link href="/recruitments?type=location">運動の募集一覧</Link>
+          </Button>
+        </div>
+      </nav>
+    </header>
   );
 };

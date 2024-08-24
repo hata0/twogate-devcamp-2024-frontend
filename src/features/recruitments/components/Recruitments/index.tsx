@@ -49,18 +49,24 @@ export const Recruitments = () => {
 
   return (
     <div>
-      <Button asChild>
-        <Link href="/recruitments/create">新しく募集する</Link>
-      </Button>
-      {type === "friend" ? (
-        <Button asChild>
-          <Link href="/recruitments?type=location">知らない人も含めて探す</Link>
-        </Button>
-      ) : (
-        <Button asChild>
-          <Link href="/recruitments?type=friend">友達のみで探す</Link>
-        </Button>
-      )}
+      <header className="bg-slate-100 p-4 shadow-md">
+        <nav className="flex items-center justify-center">
+          <div className="flex space-x-4">
+            <Button asChild>
+              <Link href="/recruitments/create">新しく募集する</Link>
+            </Button>
+            {type === "friend" ? (
+              <Button asChild>
+                <Link href="/recruitments?type=location">知らない人も含めて探す</Link>
+              </Button>
+            ) : (
+              <Button asChild>
+                <Link href="/recruitments?type=friend">友達のみで探す</Link>
+              </Button>
+            )}
+          </div>
+        </nav>
+      </header>
       <div className="flex flex-col space-y-2">
         {recruitments?.map((recruitment, index) => (
           <RecruitmentCard key={index} recruitment={recruitment} />
