@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/shadcn/ui/button";
@@ -43,6 +44,20 @@ export const CreateRecruitmentForm = ({ onSubmit }: Props) => {
     form.reset();
     await onSubmit(values);
   };
+
+  const watchRecruitmentType = form.watch("recruitmentType");
+
+  useEffect(() => {
+    console.log(watchRecruitmentType);
+    if (watchRecruitmentType.toString() === RecruitmentType.Location.toString()) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        console.log("handle");
+        const { latitude, longitude } = position.coords;
+        form.setValue("latitude", latitude, { shouldDirty: true, shouldTouch: true });
+        form.setValue("longitude", longitude, { shouldDirty: true, shouldTouch: true });
+      });
+    }
+  }, [form, watchRecruitmentType]);
 
   return (
     <Form {...form}>
