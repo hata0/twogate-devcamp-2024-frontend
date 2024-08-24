@@ -25,8 +25,9 @@ export const EmptyGetIDToken: Story = {
 };
 
 export const EmptyLiff: Story = {
-  args: {
-    liff: undefined,
+  beforeEach,
+  parameters: {
+    liffProvider: "undefined",
   },
 };
 
@@ -49,11 +50,11 @@ export const ServerError: Story = {
 };
 
 export default {
-  args: {
-    liff: LIFF,
-  },
   component: CreateRecruitment,
   parameters: {
+    liffProvider: {
+      liff: LIFF,
+    },
     msw: {
       handlers: [postRecruitmentsHandler()],
     },

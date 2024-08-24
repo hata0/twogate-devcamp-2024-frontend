@@ -8,6 +8,8 @@ type LiffContextProps = {
 
 const LiffContext = createContext<LiffContextProps>({});
 
+export { LiffContext as MockLiffContext };
+
 export const useLiffContext = () => {
   return useContext(LiffContext);
 };

@@ -2,8 +2,7 @@ import type { Preview } from "@storybook/react";
 import "../src/app/globals.css";
 import { initialize, mswLoader } from "msw-storybook-addon";
 import { withThemeByClassName } from "@storybook/addon-themes";
-import React from "react";
-import { Toaster } from "../src/components/shadcn/ui/toaster";
+import { defaultDecorator } from "../src/tests/storybook/decorators/defaultDecorator";
 
 initialize({ onUnhandledRequest: "bypass" });
 
@@ -27,12 +26,7 @@ const preview: Preview = {
       },
       defaultTheme: "light",
     }),
-    (Story) => (
-      <>
-        <Story />
-        <Toaster />
-      </>
-    ),
+    defaultDecorator,
   ],
   loaders: [mswLoader],
 };

@@ -1,16 +1,13 @@
-import { Liff } from "@line/liff";
 import { useRouter } from "next/navigation";
 
 import { CreateRecruitmentForm } from "../CreateRecruitmentForm";
 
 import { toast } from "@/components/shadcn/ui/use-toast";
+import { useLiffContext } from "@/providers/LiffProvider";
 import { CreateRecruitmentInput, postRecruitments } from "@/services/backend/recruitments";
 
-type Props = {
-  liff?: Liff;
-};
-
-export const CreateRecruitment = ({ liff }: Props) => {
+export const CreateRecruitment = () => {
+  const { liff } = useLiffContext();
   const router = useRouter();
 
   const handleSubmit = async (values: CreateRecruitmentInput) => {
