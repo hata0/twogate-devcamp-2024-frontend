@@ -1,9 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+
+import { RecruitmentCard } from "../RecruitmentCard";
 
 import { Button } from "@/components/shadcn/ui/button";
 import { Custom401 } from "@/features/error/401";
@@ -60,22 +61,11 @@ export const Recruitments = () => {
           <Link href="/recruitments?type=friend">友達のみで探す</Link>
         </Button>
       )}
-      {recruitments?.map((recruitment, index) => (
-        <div key={index} className="flex">
-          <Image alt="プロフィール画像" height={50} src={recruitment.imageUrl} width={50} />
-          <div className="flex flex-col">
-            <div>{recruitment.title}</div>
-            <div className="flex space-x-2">
-              <div>{recruitment.name}</div>
-              <div>{recruitment.createdAt.toString()}</div>
-            </div>
-            <div className="flex space-x-2">
-              <div>{recruitment.latitude}</div>
-              <div>{recruitment.longitude}</div>
-            </div>
-          </div>
-        </div>
-      ))}
+      <div className="flex flex-col space-y-2">
+        {recruitments?.map((recruitment, index) => (
+          <RecruitmentCard key={index} recruitment={recruitment} />
+        ))}
+      </div>
     </div>
   );
 };
