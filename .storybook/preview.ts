@@ -2,7 +2,9 @@ import type { Preview } from "@storybook/react";
 import "../src/app/globals.css";
 import { initialize, mswLoader } from "msw-storybook-addon";
 import { withThemeByClassName } from "@storybook/addon-themes";
-import { defaultDecorator } from "../src/tests/storybook/decorators/defaultDecorator";
+import { DefaultDecorator } from "../src/tests/storybook/decorators/DefaultDecorator";
+import { ReadonlyURLSearchParams, useSearchParams } from "@storybook/nextjs/navigation.mock";
+import { Parameters } from "../src/tests/storybook/types/Parameters";
 
 initialize({ onUnhandledRequest: "bypass" });
 
@@ -26,9 +28,20 @@ const preview: Preview = {
       },
       defaultTheme: "light",
     }),
-    defaultDecorator,
+    DefaultDecorator,
   ],
   loaders: [mswLoader],
+  beforeEach: (context) => {
+    const searchParams = (context.parameters as Parameters).searchParams;
+
+    useSearchParams.mockImplementation(() => {
+      return new ReadonlyURLSearchParams(
+        new URLSearchParams(
+          !searchParams || searchParams === "undefined" ? undefined : searchParams,
+        ),
+      );
+    });
+  },
 };
 
 export default preview;

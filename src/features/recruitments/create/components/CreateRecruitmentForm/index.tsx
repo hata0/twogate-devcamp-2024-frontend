@@ -85,7 +85,7 @@ export const CreateRecruitmentForm = ({ onSubmit }: Props) => {
         />
         <div className="flex w-full justify-end space-x-2">
           <Button asChild>
-            <Link href="/recruitments">キャンセル</Link>
+            <Link href="/recruitments?type=location">キャンセル</Link>
           </Button>
           <Button type="submit">作成</Button>
         </div>

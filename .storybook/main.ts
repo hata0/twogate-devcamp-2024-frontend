@@ -16,5 +16,14 @@ const config: StorybookConfig = {
     options: {},
   },
   staticDirs: ["../public"],
+  webpackFinal: async (config) => {
+    if (config.resolve) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        "next/router": "next-router-mock",
+      };
+    }
+    return config;
+  },
 };
 export default config;

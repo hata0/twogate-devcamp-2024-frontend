@@ -55,6 +55,14 @@ export const Error401: Story = {
   },
 };
 
+export const FriendOnlyRecruitments: Story = {
+  parameters: {
+    searchParams: {
+      type: "friend",
+    },
+  },
+};
+
 export default {
   component: Recruitments,
   parameters: {
@@ -63,6 +71,9 @@ export default {
     },
     msw: {
       handlers: [getRecruitmentsHandler()],
+    },
+    searchParams: {
+      type: "location",
     },
   },
   title: "Features/recruitments/Recruitments",

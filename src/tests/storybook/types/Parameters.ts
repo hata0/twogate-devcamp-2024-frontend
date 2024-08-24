@@ -14,4 +14,5 @@ export type Parameters = {
         liff?: Liff;
       }
     | "undefined";
+  searchParams?: Record<string, string> | "undefined";
 };

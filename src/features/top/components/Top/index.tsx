@@ -10,7 +10,7 @@ export const Top = () => {
           <Link href="/friends">フレンド一覧</Link>
         </Button>
         <Button asChild>
-          <Link href="/recruitments">運動の募集一覧</Link>
+          <Link href="/recruitments?type=location">運動の募集一覧</Link>
         </Button>
       </div>
     </div>

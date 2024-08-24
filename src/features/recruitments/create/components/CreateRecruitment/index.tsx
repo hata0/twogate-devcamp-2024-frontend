@@ -17,7 +17,7 @@ export const CreateRecruitment = () => {
       toast({ title: "エラーが発生しました。やり直してください", variant: "destructive" });
     } else {
       toast({ title: "運動募集を作成しました" });
-      router.push("/recruitments");
+      router.push("/recruitments?type=location");
     }
   };
 
