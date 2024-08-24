@@ -1,7 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
+
+import { FriendCard } from "../FriendCard";
 
 import { Custom401 } from "@/features/error/401";
 import { Custom500 } from "@/features/error/500";
@@ -39,16 +40,8 @@ export const Friends = () => {
   }
 
   return (
-    <div>
-      {friends?.map((friend, index) => (
-        <div key={index} className="flex space-x-2">
-          <Image alt="プロフィール画像" height={100} src={friend.imageUrl} width={100} />
-          <div>
-            <div>{friend.name}</div>
-            <div>{friend.exerciseGoalTitle}</div>
-          </div>
-        </div>
-      ))}
+    <div className="flex flex-col space-y-2">
+      {friends?.map((friend, index) => <FriendCard key={index} friend={friend} />)}
     </div>
   );
 };
