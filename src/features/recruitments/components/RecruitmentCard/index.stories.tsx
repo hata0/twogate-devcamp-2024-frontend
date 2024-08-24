@@ -10,6 +10,12 @@ type Story = StoryObj<T>;
 
 export const Default: Story = {};
 
+export const OtherPeople: Story = {
+  args: {
+    recruitment: createRecruitments(RecruitmentType.Location)[0],
+  },
+};
+
 export default {
   args: {
     recruitment: createRecruitments(RecruitmentType.Friend)[0],
