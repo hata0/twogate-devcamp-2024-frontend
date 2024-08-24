@@ -63,6 +63,20 @@ export const FriendOnlyRecruitments: Story = {
   },
 };
 
+export const EmptySearchParams: Story = {
+  parameters: {
+    searchParams: "undefined",
+  },
+};
+
+export const InvalidSearchParams: Story = {
+  parameters: {
+    searchParams: {
+      type: "bar",
+    },
+  },
+};
+
 export default {
   component: Recruitments,
   parameters: {

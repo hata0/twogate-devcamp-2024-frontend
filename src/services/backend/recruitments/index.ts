@@ -8,7 +8,8 @@ export * from "./type";
 
 export const createPath = () => `${BACKEND_URL}/recruitments`;
 
-export const getRecruitments = (idToken: string) => fetcherWithAuth(createPath(), idToken);
+export const getRecruitments = (idToken: string, type: string) =>
+  fetcherWithAuth(`${createPath()}?type=${type}`, idToken);
 
 export const postRecruitments = (idToken: string, values: CreateRecruitmentInput) =>
   fetcherWithAuth(createPath(), idToken, {

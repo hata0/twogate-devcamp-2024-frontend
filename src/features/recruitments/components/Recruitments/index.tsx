@@ -16,12 +16,13 @@ export const Recruitments = () => {
   const [error, setError] = useState<"401" | "500" | undefined>();
   const { liff } = useLiffContext();
   const searchParams = useSearchParams();
+  const type = formatType(searchParams.get("type") ?? "");
 
   useEffect(() => {
     void (async () => {
       if (liff) {
         const idToken = liff.getIDToken() ?? "";
-        const { error, res } = await getRecruitments(idToken);
+        const { error, res } = await getRecruitments(idToken, type);
         if (res?.status === 401) {
           setError("401");
         } else if (error || !res?.ok) {
@@ -36,7 +37,7 @@ export const Recruitments = () => {
         }
       }
     })();
-  }, [liff]);
+  }, [liff, type]);
 
   if (error === "401") {
     return <Custom401 />;
@@ -45,14 +46,12 @@ export const Recruitments = () => {
     return <Custom500 />;
   }
 
-  console.log(searchParams.get("type"));
-
   return (
     <div>
       <Button asChild>
         <Link href="/recruitments/create">新しく募集する</Link>
       </Button>
-      {searchParams.get("type") === "friend" ? (
+      {type === "friend" ? (
         <Button asChild>
           <Link href="/recruitments?type=location">知らない人も含めて探す</Link>
         </Button>
@@ -79,4 +78,13 @@ export const Recruitments = () => {
       ))}
     </div>
   );
+};
+
+const formatType = (type: string) => {
+  const flag = ["location", "friend"].includes(type);
+  if (flag) {
+    return type;
+  } else {
+    return "location";
+  }
 };

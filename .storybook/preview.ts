@@ -5,6 +5,7 @@ import { withThemeByClassName } from "@storybook/addon-themes";
 import { DefaultDecorator } from "../src/tests/storybook/decorators/DefaultDecorator";
 import { ReadonlyURLSearchParams, useSearchParams } from "@storybook/nextjs/navigation.mock";
 import { Parameters } from "../src/tests/storybook/types/Parameters";
+import { useMemo } from "react";
 
 initialize({ onUnhandledRequest: "bypass" });
 
@@ -35,11 +36,14 @@ const preview: Preview = {
     const searchParams = (context.parameters as Parameters).searchParams;
 
     useSearchParams.mockImplementation(() => {
-      return new ReadonlyURLSearchParams(
-        new URLSearchParams(
-          !searchParams || searchParams === "undefined" ? undefined : searchParams,
-        ),
+      const params = useMemo(
+        () =>
+          new ReadonlyURLSearchParams(
+            new URLSearchParams(!searchParams || searchParams === "undefined" ? {} : searchParams),
+          ),
+        [],
       );
+      return params;
     });
   },
 };
