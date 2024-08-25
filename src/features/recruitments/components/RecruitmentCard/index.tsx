@@ -5,6 +5,7 @@ import { format } from "date-fns";
 import Image from "next/image";
 
 import { Recruitment } from "@/services/backend/recruitments";
+import { createPlaceDirectionUrl } from "@/utils/google-map/createPlaceDirectionUrl";
 
 type Props = {
   recruitment: Recruitment;
@@ -47,7 +48,25 @@ export const RecruitmentCard = ({ currentPosition, recruitment }: Props) => {
           </span>
         </div>
         {recruitment.recruitmentType === RecruitmentType.Location && (
-          <div>相手までの距離：{distance} km</div>
+          <div>
+            <div>相手までの距離：{distance} km</div>
+            <a
+              className="text-blue-500"
+              href={
+                currentPosition
+                  ? createPlaceDirectionUrl({
+                      destination: {
+                        latitude: recruitment.latitude ?? 0,
+                        longitude: recruitment.longitude ?? 0,
+                      },
+                      origin: currentPosition,
+                    })
+                  : ""
+              }
+            >
+              ルートを表示
+            </a>
+          </div>
         )}
       </div>
     </div>
