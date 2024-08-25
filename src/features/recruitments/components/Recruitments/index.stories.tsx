@@ -58,7 +58,7 @@ export const Error401: Story = {
 export const FriendOnlyRecruitments: Story = {
   parameters: {
     searchParams: {
-      type: "friend",
+      type: "Friend",
     },
   },
 };
@@ -87,7 +87,7 @@ export default {
       handlers: [getRecruitmentsHandler()],
     },
     searchParams: {
-      type: "location",
+      type: "Location",
     },
   },
   title: "Features/recruitments/Recruitments",

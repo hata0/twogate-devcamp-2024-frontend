@@ -9,19 +9,12 @@ import { createRecruitments } from "@/tests/mocks/createRecruitments";
 const path = createPath();
 
 export const getRecruitmentsHandler = httpHandlerFactory("get", path, ({ request }) => {
-  const capitalizeFirstLetter = (str: string) => {
-    if (str.length === 0) return str; // 空文字列の場合はそのまま返す
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  };
-
   const url = new URL(request.url);
   const params = new URLSearchParams(url.search);
   params.forEach((value, key) => {
     console.log(`${key}=${value}`);
   });
-  return HttpResponse.json(
-    createRecruitments(capitalizeFirstLetter(params.get("type") ?? "") as RecruitmentType),
-  );
+  return HttpResponse.json(createRecruitments((params.get("type") ?? "") as RecruitmentType));
 });
 
 export const postRecruitmentsHandler = httpHandlerFactory("post", path, async ({ request }) => {

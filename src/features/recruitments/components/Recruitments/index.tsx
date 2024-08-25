@@ -1,8 +1,10 @@
 "use client";
 
+import { RecruitmentType } from "@prisma/client";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { z } from "zod";
 
 import { RecruitmentCard } from "../RecruitmentCard";
 
@@ -55,13 +57,13 @@ export const Recruitments = () => {
             <Button asChild>
               <Link href="/recruitments/create">新しく募集する</Link>
             </Button>
-            {type === "friend" ? (
+            {type === RecruitmentType.Friend ? (
               <Button asChild>
-                <Link href="/recruitments?type=location">知らない人も含めて探す</Link>
+                <Link href="/recruitments?type=Location">知らない人も含めて探す</Link>
               </Button>
             ) : (
               <Button asChild>
-                <Link href="/recruitments?type=friend">友達のみで探す</Link>
+                <Link href="/recruitments?type=Friend">友達のみで探す</Link>
               </Button>
             )}
           </div>
@@ -77,10 +79,10 @@ export const Recruitments = () => {
 };
 
 const formatType = (type: string) => {
-  const flag = ["location", "friend"].includes(type);
-  if (flag) {
-    return type;
+  const result = z.nativeEnum(RecruitmentType).safeParse(type);
+  if (result.success) {
+    return result.data;
   } else {
-    return "location";
+    return RecruitmentType.Location;
   }
 };
