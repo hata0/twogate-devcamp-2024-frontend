@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum RecruitmentType {
+  Friend
+  Location
+}
+
+model User {
+  id         String @id @default(uuid())
+  lineId     String @unique
+  friendCode String @unique
+
+  exerciseGoal ExerciseGoal?
+
+  friends  Friend[] @relation("UserFriends")
+  friendOf Friend[] @relation("UserFriendOf")
+
+  recruitment Recruitment[]
+
+  userState UserState?
+
+  location Location?
+}
+
+model Friend {
+  id           String @id @default(uuid())
+  userId       String
+  friendUserId String
+
+  user       User @relation("UserFriends", fields: [userId], references: [id])
+  friendUser User @relation("UserFriendOf", fields: [friendUserId], references: [id])
+
+  @@unique([userId, friendUserId])
+}
+
+model ExerciseGoal {
+  id     String @id @default(uuid())
+  title  String
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model Recruitment {
+  id              String          @id @default(uuid())
+  title           String
+  recruitmentType RecruitmentType
+  createdAt       DateTime        @default(now())
+  userId          String
+  user            User            @relation(fields: [userId], references: [id])
+}
+
+model UserState {
+  id     String @id @default(uuid())
+  userId String @unique
+
+  messageState String
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Location {
+  id        String @id @default(uuid())
+  latitude  Float
+  longitude Float
+  userId    String @unique
+  user      User   @relation(fields: [userId], references: [id])
+}
