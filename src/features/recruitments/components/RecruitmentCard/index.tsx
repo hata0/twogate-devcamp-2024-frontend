@@ -1,3 +1,4 @@
+import { RecruitmentType } from "@prisma/client";
 import { format } from "date-fns";
 import Image from "next/image";
 
@@ -28,7 +29,7 @@ export const RecruitmentCard = ({ recruitment }: Props) => {
         <p className="text-sm text-gray-500">{formattedDate}</p>
         <div className="mt-4">
           <span className="inline-block rounded-full bg-blue-200 px-3 py-1 text-sm font-semibold text-gray-700">
-            {recruitment.recruitmentType.toString() === "0" ? "友達" : "知らない人"}
+            {recruitment.recruitmentType === RecruitmentType.Friend ? "友達" : "知らない人"}
           </span>
         </div>
       </div>

@@ -1,6 +1,7 @@
+import { RecruitmentType } from "@prisma/client";
+
 import { RecruitmentCard } from ".";
 
-import { RecruitmentType } from "@/services/backend/recruitments";
 import { createRecruitments } from "@/tests/mocks/createRecruitments";
 import { Meta } from "@/tests/storybook/types/Meta";
 import { StoryObj } from "@/tests/storybook/types/StoryObj";

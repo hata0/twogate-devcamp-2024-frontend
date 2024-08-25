@@ -1,4 +1,6 @@
-import { Recruitment, RecruitmentType } from "@/services/backend/recruitments";
+import { RecruitmentType } from "@prisma/client";
+
+import { Recruitment } from "@/services/backend/recruitments";
 
 export const createRecruitments = (recruitmentType: RecruitmentType): Recruitment[] => {
   const createData = (data: Omit<Recruitment, "recruitmentType" | "imageUrl">): Recruitment => {

@@ -23,7 +23,7 @@ export const Recruitments = () => {
     void (async () => {
       if (liff) {
         const idToken = liff.getIDToken() ?? "";
-        const { error, res } = await getRecruitments(idToken, typeToNumber(type).toString());
+        const { error, res } = await getRecruitments(idToken, type);
         if (res?.status === 401) {
           setError("401");
         } else if (error || !res?.ok) {
@@ -82,13 +82,5 @@ const formatType = (type: string) => {
     return type;
   } else {
     return "location";
-  }
-};
-
-const typeToNumber = (type: string) => {
-  if (type === "friend") {
-    return 0;
-  } else {
-    return 1;
   }
 };
