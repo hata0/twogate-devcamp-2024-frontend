@@ -11,7 +11,9 @@ export * from "./type";
 export const createPath = () => `${BACKEND_URL}/recruitments`;
 
 export const getRecruitments = (idToken: string, type: RecruitmentType) =>
-  fetcherWithAuth(`${createPath()}?type=${type}`, idToken);
+  fetcherWithAuth(`${createPath()}?type=${type}`, idToken, {
+    cache: "no-store",
+  });
 
 export const postRecruitments = (idToken: string, values: CreateRecruitmentInput) =>
   fetcherWithAuth(createPath(), idToken, {
