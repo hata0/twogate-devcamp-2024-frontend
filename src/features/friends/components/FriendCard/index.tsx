@@ -20,7 +20,9 @@ export const FriendCard = ({ friend }: Props) => {
         />
         <div className="ml-4">
           <h2 className="text-lg font-bold">{friend.name}</h2>
-          <p className="text-gray-600">{friend.exerciseGoalTitle}</p>
+          <p className="text-gray-600">
+            {friend.exerciseGoalTitle ?? "運動の目標は設定されていません"}
+          </p>
         </div>
       </div>
     </div>
