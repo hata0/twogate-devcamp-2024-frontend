@@ -2,7 +2,7 @@ import { Mock } from "@storybook/test";
 
 import { Friends } from ".";
 
-import { getFriendsHandler } from "@/services/backend/friends/mock";
+import { getFriendsHandler } from "@/services/backend/users/me/friends/mock";
 import { LIFF } from "@/tests/mocks/liff";
 import { Meta } from "@/tests/storybook/types/Meta";
 import { StoryObj } from "@/tests/storybook/types/StoryObj";

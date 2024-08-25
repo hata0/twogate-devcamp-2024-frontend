@@ -1,4 +1,4 @@
-import { Friend } from "@/services/backend/friends";
+import { Friend } from "@/services/backend/users/me/friends";
 
 export const FRIENDS: Friend[] = [
   {

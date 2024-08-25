@@ -7,7 +7,7 @@ import { FriendCard } from "../FriendCard";
 import { Custom401 } from "@/features/error/401";
 import { Custom500 } from "@/features/error/500";
 import { useLiffContext } from "@/providers/LiffProvider";
-import { Friend, getFriends } from "@/services/backend/friends";
+import { Friend, getFriends } from "@/services/backend/users/me/friends";
 
 export const Friends = () => {
   const { liff } = useLiffContext();

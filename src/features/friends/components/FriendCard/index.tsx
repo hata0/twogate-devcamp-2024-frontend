@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { Friend } from "@/services/backend/friends";
+import { Friend } from "@/services/backend/users/me/friends";
 
 type Props = {
   friend: Friend;
