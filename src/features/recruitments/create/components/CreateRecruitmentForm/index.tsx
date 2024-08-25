@@ -1,4 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { RecruitmentType } from "@prisma/client";
 import Link from "next/link";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -23,7 +24,6 @@ import {
 import {
   CreateRecruitmentInput,
   createRecruitmentInputSchema,
-  RecruitmentType,
 } from "@/services/backend/recruitments";
 
 type Props = {
@@ -48,8 +48,7 @@ export const CreateRecruitmentForm = ({ onSubmit }: Props) => {
   const watchRecruitmentType = form.watch("recruitmentType");
 
   useEffect(() => {
-    console.log(watchRecruitmentType);
-    if (watchRecruitmentType.toString() === RecruitmentType.Location.toString()) {
+    if (watchRecruitmentType === RecruitmentType.Location) {
       navigator.geolocation.getCurrentPosition((position) => {
         console.log("handle");
         const { latitude, longitude } = position.coords;
@@ -91,8 +90,8 @@ export const CreateRecruitmentForm = ({ onSubmit }: Props) => {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value={RecruitmentType.Friend.toString()}>友達のみ</SelectItem>
-                  <SelectItem value={RecruitmentType.Location.toString()}>場所を指定</SelectItem>
+                  <SelectItem value={RecruitmentType.Friend}>友達のみ</SelectItem>
+                  <SelectItem value={RecruitmentType.Location}>場所を指定</SelectItem>
                 </SelectContent>
               </Select>
             </FormItem>
