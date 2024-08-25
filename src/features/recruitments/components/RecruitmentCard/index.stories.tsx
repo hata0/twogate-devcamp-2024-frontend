@@ -19,6 +19,10 @@ export const OtherPeople: Story = {
 
 export default {
   args: {
+    currentPosition: {
+      latitude: 34.6937249,
+      longitude: 135.5022535,
+    },
     recruitment: createRecruitments(RecruitmentType.Friend)[0],
   },
   component: RecruitmentCard,

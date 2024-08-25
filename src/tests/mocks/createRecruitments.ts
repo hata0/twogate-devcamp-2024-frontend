@@ -14,8 +14,8 @@ export const createRecruitments = (recruitmentType: RecruitmentType): Recruitmen
   return [
     createData({
       createdAt: new Date(2000, 0, 1, 0, 0),
-      latitude: 30,
-      longitude: 30,
+      latitude: 35.6814497,
+      longitude: 139.7660519,
       name: "あああ",
       title: "運動しよう",
     }),

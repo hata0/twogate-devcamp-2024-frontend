@@ -14,12 +14,18 @@ import { Custom500 } from "@/features/error/500";
 import { useLiffContext } from "@/providers/LiffProvider";
 import { getRecruitments, Recruitment } from "@/services/backend/recruitments";
 
+type Position = {
+  latitude: number;
+  longitude: number;
+};
+
 export const Recruitments = () => {
   const [recruitments, setRecruitments] = useState<Recruitment[] | undefined>();
   const [error, setError] = useState<"401" | "500" | undefined>();
   const { liff } = useLiffContext();
   const searchParams = useSearchParams();
   const type = formatType(searchParams.get("type") ?? "");
+  const [currentPosition, setCurrentPosition] = useState<Position | undefined>();
 
   useEffect(() => {
     void (async () => {
@@ -41,6 +47,15 @@ export const Recruitments = () => {
       }
     })();
   }, [liff, type]);
+
+  useEffect(() => {
+    if (type === "Location") {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+        setCurrentPosition({ latitude, longitude });
+      });
+    }
+  }, [type]);
 
   if (error === "401") {
     return <Custom401 />;
@@ -71,7 +86,11 @@ export const Recruitments = () => {
       </header>
       <div className="flex flex-col space-y-2">
         {recruitments?.map((recruitment, index) => (
-          <RecruitmentCard key={index} recruitment={recruitment} />
+          <RecruitmentCard
+            key={index}
+            currentPosition={currentPosition}
+            recruitment={recruitment}
+          />
         ))}
       </div>
     </div>

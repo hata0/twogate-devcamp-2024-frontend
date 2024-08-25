@@ -9,8 +9,8 @@ export type Recruitment = {
   createdAt: Date;
   name: string;
   imageUrl: string;
-  latitude: number;
-  longitude: number;
+  latitude?: number;
+  longitude?: number;
 };
 
 export type CreateRecruitmentInput = z.infer<typeof createRecruitmentInputSchema>;
