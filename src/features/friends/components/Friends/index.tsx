@@ -41,7 +41,9 @@ export const Friends = () => {
 
   return (
     <div className="flex flex-col space-y-2">
-      {friends?.map((friend, index) => <FriendCard key={index} friend={friend} />)}
+      {friends?.length !== 0
+        ? friends?.map((friend, index) => <FriendCard key={index} friend={friend} />)
+        : "まだ友達はいません"}
     </div>
   );
 };

@@ -85,13 +85,15 @@ export const Recruitments = () => {
         </nav>
       </header>
       <div className="flex flex-col space-y-2">
-        {recruitments?.map((recruitment, index) => (
-          <RecruitmentCard
-            key={index}
-            currentPosition={currentPosition}
-            recruitment={recruitment}
-          />
-        ))}
+        {recruitments?.length !== 0
+          ? recruitments?.map((recruitment, index) => (
+              <RecruitmentCard
+                key={index}
+                currentPosition={currentPosition}
+                recruitment={recruitment}
+              />
+            ))
+          : "募集が見つかりません"}
       </div>
     </div>
   );

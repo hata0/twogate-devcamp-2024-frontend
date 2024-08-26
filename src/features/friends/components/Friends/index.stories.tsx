@@ -1,4 +1,5 @@
 import { Mock } from "@storybook/test";
+import { HttpResponse } from "msw";
 
 import { Friends } from ".";
 
@@ -51,6 +52,20 @@ export const Error401: Story = {
   parameters: {
     msw: {
       handlers: [getFriendsHandler({ error: { status: 401 } })],
+    },
+  },
+};
+
+export const EmptyData: Story = {
+  parameters: {
+    msw: {
+      handlers: [
+        getFriendsHandler({
+          resolver: () => {
+            return HttpResponse.json([]);
+          },
+        }),
+      ],
     },
   },
 };

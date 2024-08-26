@@ -1,4 +1,5 @@
 import { Mock } from "@storybook/test";
+import { HttpResponse } from "msw";
 
 import { Recruitments } from ".";
 
@@ -73,6 +74,20 @@ export const InvalidSearchParams: Story = {
   parameters: {
     searchParams: {
       type: "bar",
+    },
+  },
+};
+
+export const EmptyData: Story = {
+  parameters: {
+    msw: {
+      handlers: [
+        getRecruitmentsHandler({
+          resolver: () => {
+            return HttpResponse.json([]);
+          },
+        }),
+      ],
     },
   },
 };
